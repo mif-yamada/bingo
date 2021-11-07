@@ -5,6 +5,7 @@ interface ButtonProps {
   title: string;
   onClick: () => void;
 }
+
 const StyledButton = styled.button`
   display: inline-block;
   text-align: center;
@@ -21,7 +22,6 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-// const 不変
 const Button:React.FC<ButtonProps> = (props:ButtonProps) => {
   const {
     title,

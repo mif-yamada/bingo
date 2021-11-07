@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 interface CellProps{
   num: number;
-  isBlank?:boolean;
+  isBlank?:boolean;//必須ではない情報は　?付ける
 }
 const StyledCell = styled.div`
   width: 60px;
