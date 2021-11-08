@@ -8,10 +8,10 @@ interface CardProps{
 }
 
 const StyledCard = styled.table`
+  margin: 0 auto;
   width: 400px;
   height: 400px;
-  background-color: #aedefa;
-  border: solid 2px;
+  background-color: #eefcff;
   display: flex;
   justify-content: center;
   align-items: center;
