@@ -6,6 +6,26 @@ export const randomNumber = (min: number, max: number) => {
 }
 
 export const createRandomNumberList = (min: number, max: number, length: number) => {
-  const randomNumList = new Array(length).map(() => randomNumber(min, max));
+  const randomNumList = new Set([...Array(length)].map(_ => randomNumber(min, max)));
+  return Array.from(randomNumList);
+}
 
+export const createNoDuplicationSortRandomNumList = (min: number, max: number, size: number) => {
+  const numList= [...Array(size)].map(_ => _ + 1);
+  const callCreateRandomNumList = (length: number) => createRandomNumberList(min, max, length);
+  //Sizeに足りない要素を加える
+  const joinRandomNumList = (array: number[], joinElementNum: number) => {
+    const joinList = callCreateRandomNumList(joinElementNum);
+    return Array.from(new Set([...array, ...joinList]));
+  }
+  const initNumList = callCreateRandomNumList(size);
+  const createNoDuplicationRandomNumList = ():number[] => {
+    const noDuplicationRandomNumList = joinRandomNumList(initNumList,size-initNumList.length);
+    if (size !== noDuplicationRandomNumList.length) {
+      return createNoDuplicationRandomNumList();
+    }
+    return noDuplicationRandomNumList;
+  }
+  const list = Array.from(createNoDuplicationRandomNumList());
+  return list;
 }

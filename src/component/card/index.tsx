@@ -26,10 +26,10 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     <StyledCard>
       <tbody>
       {cardNumberList.map((li, i) => {
-        return (<tr>{
+        return (<tr key={i}>{
             li.map((val: number, idx: number) => {
               return (
-                <td>
+                <td key={val + idx}>
                   <Cell num={val} isBlank={isBlanked(val)}></Cell>
                 </td>
               );
