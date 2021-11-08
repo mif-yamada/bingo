@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Button title='bingo' onClick={() => { }}></Button>
-      <Card cardNumberList={[[1,2,3,4,25],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],]}></Card>
+      <Card cardNumberList={[[1,2,3,4,25],[1,2,3,4,35],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],]}></Card>
     </div>
   );
 }
