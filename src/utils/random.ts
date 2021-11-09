@@ -17,13 +17,11 @@ export const noDuplicationRandomNum = (min: number, max: number, array: number[]
 export const createRandomNumberList = (min: number, max: number, length: number) => {
   const randomNumList = [...Array(length)].map(() => randomNumber(min, max));
   return Array.from(randomNumList);
-  // return [1, 2, 3, 4, 5];
 }
 
 export const createNoDuplicationSortRandomNumList = (min: number, max: number, size:number) => {
-  // const numList= [...Array(size)].map(index => index + 1);
   const callCreateRandomNumList = (length: number) =>
-    createRandomNumberList(min, max, length);
+  createRandomNumberList(min, max, length);
   //Sizeに足りない要素を加える
   const joinRandomNumList = (array: number[], joinElementNum: number) => {
     const joinList = callCreateRandomNumList(joinElementNum);

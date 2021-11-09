@@ -10,12 +10,13 @@ const App: React.FC = () => {
   const [ballNumList, setBallNumList] = useState<number[]>([0]);
 
   const getBall = () => {
+    //ダブりがなきゃボールリストに入れる
+    //カードチェックし、穴を開ける
     if (ballNumList.length < 76) {
       const RandomNum = noDuplicationRandomNum(1, 75, ballNumList);
-    }
+      setBallNumList(ballNumList.filter((val) => { ballNumList.includes(RandomNum)}))
+      }
   };
-
-
   return (
     <div className="App">
       <Button title='bingo' onClick={() => { }}></Button>
