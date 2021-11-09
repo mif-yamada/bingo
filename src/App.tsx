@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import { Button } from './component/button';
 import { Card } from './component/card';
-import { createNoDuplicationSortRandomNumList } from "./utils/random";
+import { createRandomCardNumList } from "./utils/random";
 
 function App() {
+  console.log(createRandomCardNumList);
   return (
     <div className="App">
       <Button title='bingo' onClick={() => { }}></Button>
