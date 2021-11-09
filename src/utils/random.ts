@@ -14,13 +14,13 @@ export const noDuplicationRandomNum = (min: number, max: number, array: number[]
   return getNum;
 }
 
-
 export const createRandomNumberList = (min: number, max: number, length: number) => {
   const randomNumList = [...Array(length)].map(() => randomNumber(min, max));
   return Array.from(randomNumList);
 }
 
-export const createNoDuplicationSortRandomNumList = (min: number, max: number, size: number) => {
+export const createNoDuplicationSortRandomNumList = (min: number, max: number) => {
+  const size = 5;
   const numList= [...Array(size)].map(index => index + 1);
   const callCreateRandomNumList = (length: number) => createRandomNumberList(min, max, length);
   //Sizeに足りない要素を加える
@@ -38,4 +38,15 @@ export const createNoDuplicationSortRandomNumList = (min: number, max: number, s
   }
   const list = Array.from(createNoDuplicationRandomNumList());
   return list;
+}
+
+export const createRandomCardNumList = () => {
+  const colNumbersB = createNoDuplicationSortRandomNumList(1, 15);
+  const colNumbersI = createNoDuplicationSortRandomNumList(16, 30);
+  const colNumbersN = createNoDuplicationSortRandomNumList(31, 45);
+  const colNumbersG = createNoDuplicationSortRandomNumList(45, 60);
+  const colNumbersO = createNoDuplicationSortRandomNumList(61, 75);
+
+  const colNumList = () => {
+  }
 }
