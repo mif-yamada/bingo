@@ -41,12 +41,16 @@ export const createNoDuplicationSortRandomNumList = (min: number, max: number) =
 }
 
 export const createRandomCardNumList = () => {
-  const colNumbersB = createNoDuplicationSortRandomNumList(1, 15);
-  const colNumbersI = createNoDuplicationSortRandomNumList(16, 30);
-  const colNumbersN = createNoDuplicationSortRandomNumList(31, 45);
-  const colNumbersG = createNoDuplicationSortRandomNumList(45, 60);
-  const colNumbersO = createNoDuplicationSortRandomNumList(61, 75);
+  // const colNumbersB = createNoDuplicationSortRandomNumList(1, 15);
+  // const colNumbersI = createNoDuplicationSortRandomNumList(16, 30);
+  // const colNumbersN = createNoDuplicationSortRandomNumList(31, 45);
+  // const colNumbersG = createNoDuplicationSortRandomNumList(45, 60);
+  // const colNumbersO = createNoDuplicationSortRandomNumList(61, 75);
 
-  const colNumList = () => {
-  }
+  const cardNumList = [...Array(5)].map((val, idx, list) => {
+    const colList: number[] = createNoDuplicationSortRandomNumList(idx * 15 + 1, (idx + 1) * 15);
+    return colList;
+  });
+
+  return cardNumList;
 }
