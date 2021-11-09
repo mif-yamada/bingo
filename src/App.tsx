@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Button } from './component/button';
 import { Card } from './component/card';
+import { createNoDuplicationSortRandomNumList } from "./utils/random";
 
 function App() {
   return (
