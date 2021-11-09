@@ -5,7 +5,6 @@ import { Card } from './component/card';
 import { createNoDuplicationSortRandomNumList } from "./utils/random";
 
 function App() {
-  console.log(createNoDuplicationSortRandomNumList(1, 75, 4));
   return (
     <div className="App">
       <Button title='bingo' onClick={() => { }}></Button>

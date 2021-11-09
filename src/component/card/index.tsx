@@ -20,13 +20,13 @@ const StyledCard = styled.table`
 const Card: React.FC<CardProps> = (props: CardProps) => {
   const {
     cardNumberList,patchList
-  } = props;
+  } = props
   const isBlanked = (val :number) => patchList?.includes(val);
   return (
     <StyledCard>
       <tbody>
       {cardNumberList.map((li, i) => {
-        return (<tr key={i}>{
+        return (<tr key={li[i]}>{
             li.map((val: number, idx: number) => {
               return (
                 <td key={val + idx}>
