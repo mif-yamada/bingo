@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Cell } from '../cell';
-import { createNoDuplicationSortRandomNumList} from "../../utils/random";
+// import { createNoDuplicationSortRandomNumList} from "../../utils/random";
 
 interface CardProps{
   cardNumberList: number[][];
