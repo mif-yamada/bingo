@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Button } from './component/button';
 import { Card } from './component/card';
-import { createRandomCardNumList } from "./utils/random";
+import { createRandomCardNumList } from './utils/createCard';
+import { noDuplicationRandomNum } from './utils/random';
 
-function App() {
-  console.log(createRandomCardNumList);
+const App: React.FC = () => {
+  const [ball, setBall] = useState<number>(0);
+  const [ballNumList, setBallNumList] = useState<number[]>([0]);
+  const [lostAllBall, setLostAllBall] = useState<boolean>(false);
+  const [cardList, setCardList] = useState<number[][]>([]);
+  const [strCardList, setSterCardList] = useState([]);
+
+  // useEffect = () => {
+  //   const initCard = createRandomCardNumList();
+
+  // }
+  const getBall = () => {
+    //カードチェックし、穴を開ける
+    if (ballNumList.length < 76) {
+      const ballNum = noDuplicationRandomNum(1, 75, ballNumList);
+      setBall(ballNum);
+      setBallNumList(ballNumList.concat(ballNum));
+      console.log(`${ball},${ballNumList}`)
+    } else {
+      setLostAllBall(true);
+    }
+  };
+
+
+
   return (
     <div className="App">
-      <Button title='bingo' onClick={() => { }}></Button>
-      <Card cardNumberList={[[1,2,3,4,25],[1,2,3,4,35],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],]}></Card>
+      <Button title='bingo' onClick={() =>getBall()}></Button>
+      <Card cardNumberList={strCardList}></Card>
     </div>
   );
 }
