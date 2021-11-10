@@ -1,6 +1,3 @@
-//ボールランダムとカードのランダム
-
-//min max内からランダムで整数を一つ返す
 export const randomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -27,8 +24,6 @@ export const createNoDuplicationSortRandomNumList = (min: number, max: number, s
     const joinList = callCreateRandomNumList(joinElementNum);
     return Array.from(new Set([...array, ...joinList]));
   };
-
-  //ここでダブりを排除
   const initNumList = Array.from(new Set(callCreateRandomNumList(size)));
   const createNoDuplicationRandomNumList = (): number[] => {
     const noDuplicationRandomNumList = joinRandomNumList(

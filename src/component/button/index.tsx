@@ -30,7 +30,7 @@ const Button:React.FC<ButtonProps> = (props:ButtonProps) => {
     onClick
   } = props;
   return (
-    <StyledButton onClick={onClick} >
+    <StyledButton onClick={onClick}>
       {title}
     </StyledButton>
   );

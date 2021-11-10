@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+
 import { Cell } from '../cell';
 
 interface CardProps{
