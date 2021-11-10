@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { Button } from './component/button';
-import { Card } from './component/card';
-import { createRandomCardNumList } from './utils/createCard';
-import { noDuplicationRandomNum } from './utils/random';
+import React, { useState, useEffect, useCallback } from "react";
+import styled from "@emotion/styled";
+import "./App.css";
+import { Button } from "./component/button";
+import { Card } from "./component/card";
+import { createRandomCardNumList } from "./utils/createCard";
+import { noDuplicationRandomNum } from "./utils/random";
+
+const StyledResult = styled.div`
+  margin:10px;
+  color:#4767c0;
+`;
 
 const App: React.FC = () => {
   const [ball, setBall] = useState<number>(0);
@@ -11,12 +17,26 @@ const App: React.FC = () => {
   const [lostAllBall, setLostAllBall] = useState<boolean>(false);
   const [cardList, setCardList] = useState<number[][]>([]);
   const [colCheckCardList, setColCheckCardList] = useState<number[][]>([]);
+  const [crossCheckCardList, setCrossCheckCardList] = useState<number[][]>([]);
+  const [isReach,setIsReach]=useState<boolean>(false);
+  const [isBingo,setIsBingo]=useState<boolean>(false);
 
   useEffect(() => {
+    initCardList();
+  }, []);
+
+  const initCardList=()=>{
     const initCard = createRandomCardNumList();
     setCardList(initCard.cardNumList);
     setColCheckCardList(initCard.centerFreeNumList);
-  }, []);
+    const crossNumList1 = [...Array(5)].map((val, idx) => {
+      return (val = initCard.cardNumList[idx][idx]);
+    });
+    const crossNumList2 = [...Array(5)].map((val, idx) => {
+      return (val = initCard.cardNumList[idx][4 - idx]);
+    });
+    setCrossCheckCardList([crossNumList1, crossNumList2]);
+  }
 
   const getBall = () => {
     //カードチェックし、穴を開ける
@@ -29,29 +49,47 @@ const App: React.FC = () => {
     }
   };
 
-  //斜めリスト
-  const crossCheckCardList = [
-    [cardList[0][0], cardList[1][1], 0, cardList[3][3], cardList[4][4]],
-    [cardList[0][4], cardList[1][3], 0, cardList[3][1], cardList[4][0]],
-  ];
-  //TODO: bingoreachチェックに使用
-  const checkCardNum = (checkList: number[][], ballnum: number) => {
-    //.lengthの値で判定
-    const checkCount = checkList.map((array, idx, list) => {
-      const checkarray: number[] = array.filter((val) => val === ballnum);
+  const checkCard = useCallback((reachOrBingo: number): boolean => {
+    //縦横斜め合体リスト
+    const checkList = cardList.concat(colCheckCardList, crossCheckCardList);
+    const checkCountList = checkList.map((array) => {
+      const checkarray: number[] = array.filter((cardNum) =>
+        ballNumList.includes(cardNum)
+      );
       return checkarray.length;
     });
-  };
+    //checkCountListに5があればBingo
+    if (checkCountList.includes(reachOrBingo)) {
+      return true;
+    } else {
+      return false;
+    }
+  },[ballNumList, cardList, colCheckCardList,crossCheckCardList]);
 
-  //TODO:ボールを引いたら動くもの
-  useEffect(() => {}, [ballNumList]);
+  const resetBingo = () => {
+    setBallNumList([]);
+    setLostAllBall(false);
+    initCardList();
+    setIsReach(false);
+    setIsBingo(false);
+  }
+
+  useEffect(() => {
+    setIsReach(checkCard(4));
+    setIsBingo(checkCard(5));
+  }, [ballNumList,checkCard]);
 
   return (
     <div className="App">
-      <Button title="bingo" onClick={() => getBall()}></Button>
+      <StyledResult>GetBallNum:{ball}</StyledResult>
+      <StyledResult>REACH:{isReach ? "リーチ！" : ""}</StyledResult>
+      <StyledResult>BINGO:{isBingo ? "ビンゴ‼︎" : ""}</StyledResult>
+      <StyledResult>{lostAllBall&& "END"}</StyledResult>
+      <Button title="GetBall" onClick={() => getBall()}></Button>
+      <Button title="Reset" onClick={() => resetBingo()}></Button>
       <Card cardNumberList={cardList} ballNumList={ballNumList}></Card>
     </div>
   );
-}
+};
 
 export default App;
