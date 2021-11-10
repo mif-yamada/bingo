@@ -11,10 +11,11 @@ const StyledCard = styled.table`
   margin: 0 auto;
   width: 400px;
   height: 400px;
-  background-color: #eefcff;
+  background-color: #879fb7;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
 `;
 
 const Card: React.FC<CardProps> = (props: CardProps) => {

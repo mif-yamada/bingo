@@ -8,7 +8,11 @@ import { noDuplicationRandomNum } from "./utils/random";
 
 const StyledResult = styled.div`
   margin:10px;
-  color:#4767c0;
+  color:#374362;
+`;
+
+const StyledPage = styled.div`
+  background-color: #bfc6de;
 `;
 
 const App: React.FC = () => {
@@ -39,7 +43,6 @@ const App: React.FC = () => {
   }
 
   const getBall = () => {
-    //カードチェックし、穴を開ける
     if (ballNumList.length < 76) {
       const ballNum = noDuplicationRandomNum(1, 75, ballNumList);
       setBall(ballNum);
@@ -58,7 +61,7 @@ const App: React.FC = () => {
       );
       return checkarray.length;
     });
-    //checkCountListに5があればBingo
+    //checkCountListに4があればReach、5があればBingo
     if (checkCountList.includes(reachOrBingo)) {
       return true;
     } else {
@@ -67,6 +70,7 @@ const App: React.FC = () => {
   },[ballNumList, cardList, colCheckCardList,crossCheckCardList]);
 
   const resetBingo = () => {
+    setBall(0);
     setBallNumList([]);
     setLostAllBall(false);
     initCardList();
@@ -80,7 +84,7 @@ const App: React.FC = () => {
   }, [ballNumList,checkCard]);
 
   return (
-    <div className="App">
+    <StyledPage className="App">
       <StyledResult>GetBallNum:{ball}</StyledResult>
       <StyledResult>REACH:{isReach ? "リーチ！" : ""}</StyledResult>
       <StyledResult>BINGO:{isBingo ? "ビンゴ‼︎" : ""}</StyledResult>
@@ -88,7 +92,7 @@ const App: React.FC = () => {
       <Button title="GetBall" onClick={() => getBall()}></Button>
       <Button title="Reset" onClick={() => resetBingo()}></Button>
       <Card cardNumberList={cardList} ballNumList={ballNumList}></Card>
-    </div>
+    </StyledPage>
   );
 };
 
