@@ -26,7 +26,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     <StyledCard>
       <tbody>
         {cardNumberList.map((li, i) => {
-        return (<tr key={li[i]}>{
+        return (<tr key={li[i]+i}>{
             li.map((val: number, idx: number) => {
               return (
                 <td key={val + idx}>
