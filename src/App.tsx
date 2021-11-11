@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 
-import "./App.css";
 import { Button } from "./component/button";
 import { Card } from "./component/card";
 import { createRandomCardNumList } from "./utils/createCard";
 import { noDuplicationRandomNum } from "./utils/random";
 
 const StyledPage = styled.div`
-  height:100vh;
-  width:100vw;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
   background-color: #bfc6de;
 `;
 const StyledResult = styled.div`
@@ -83,7 +83,7 @@ const App: React.FC = () => {
   }, [ballNumList, checkCard]);
 
   return (
-    <StyledPage className="App">
+    <StyledPage>
       <StyledResult>GetBallNum:{ball}</StyledResult>
       <StyledResult>REACH:{isReach ? "リーチ！" : ""}</StyledResult>
       <StyledResult>BINGO:{isBingo ? "ビンゴ‼︎" : ""}</StyledResult>
