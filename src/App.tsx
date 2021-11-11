@@ -7,13 +7,14 @@ import { Card } from "./component/card";
 import { createRandomCardNumList } from "./utils/createCard";
 import { noDuplicationRandomNum } from "./utils/random";
 
-const StyledResult = styled.div`
-  margin:10px;
-  color:#374362;
-`;
-
 const StyledPage = styled.div`
+  height:100vh;
+  width:100vw;
   background-color: #bfc6de;
+`;
+const StyledResult = styled.div`
+  padding:10px;
+  color:#374362;
 `;
 
 const App: React.FC = () => {
@@ -62,6 +63,7 @@ const App: React.FC = () => {
       );
       return checkarray.length;
     });
+
     //checkCountListに4があればReach、5があればBingo
     if (checkCountList.includes(reachOrBingo)) {
       return true;
@@ -72,7 +74,7 @@ const App: React.FC = () => {
 
   const resetBingo = () => {
     setBall(0);
-    setBallNumList([]);
+    setBallNumList([0]);
     setLostAllBall(false);
     initCardList();
     setIsReach(false);
@@ -82,7 +84,7 @@ const App: React.FC = () => {
   useEffect(() => {
     setIsReach(checkCard(4));
     setIsBingo(checkCard(5));
-  }, [ballNumList,checkCard]);
+  }, [ballNumList, checkCard]);
 
   return (
     <StyledPage className="App">
