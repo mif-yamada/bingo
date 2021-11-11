@@ -24,15 +24,16 @@ const StyleCellIsBlank = styled(StyleCellFrame)`
 `;
 
 
-const Cell: React.FC<CellProps> = (props:CellProps) => {
+const Cell: React.FC<CellProps> = (props: CellProps) => {
   const {
     num,
     isBlank
   } = props;
+  const strNum = num === 0 ? "FREE" : num;
   return isBlank ? (
-    <StyleCellIsBlank>{num === 0 ? "FREE" : num}</StyleCellIsBlank>
+    <StyleCellIsBlank>{strNum}</StyleCellIsBlank>
   ) : (
-    <StyleCellFrame>{num === 0 ? "FREE" : num}</StyleCellFrame>
+    <StyleCellFrame>{strNum}</StyleCellFrame>
   );
 };
 

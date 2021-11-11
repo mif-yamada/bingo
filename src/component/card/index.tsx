@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
-import { Cell } from '../cell';
+import { Cell } from "../cell";
 
-interface CardProps{
+interface CardProps {
   cardNumberList: number[][];
-  ballNumList?: number[];
+  ballNumList: number[];
 }
 
 const StyledCard = styled.table`
@@ -20,28 +20,27 @@ const StyledCard = styled.table`
 `;
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const {
-    cardNumberList,ballNumList
-  } = props
-  const isBlanked = (val: number) => val===0||ballNumList?.includes(val);
+  const { cardNumberList, ballNumList } = props;
+  const isBlanked = (val: number) => ballNumList.includes(val);
   return (
     <StyledCard>
       <tbody>
         {cardNumberList.map((li, i) => {
-        return (<tr key={`${li[i]} ${i}`}>{
-            li.map((val: number, idx: number) => {
-              return (
-                <td key={`${val} ${idx}`}>
-                  <Cell num={val} isBlank={isBlanked(val)}></Cell>
-                </td>
-              );
-            })
-        }</tr>
-        );
-      })}
+          return (
+            <tr key={`${ li[i] } ${ i };`}>
+              {li.map((val: number, idx: number) => {
+                return (
+                  <td key={`${val} ${idx}`}>
+                    <Cell num={val} isBlank={isBlanked(val)}></Cell>
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
       </tbody>
     </StyledCard>
   );
-}
+};
 
-export {Card};
+export { Card };

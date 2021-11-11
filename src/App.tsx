@@ -18,6 +18,7 @@ const StyledResult = styled.div`
 `;
 
 const App: React.FC = () => {
+  const cardSize = 5;
   const [ball, setBall] = useState<number>(0);
   const [ballNumList, setBallNumList] = useState<number[]>([0]);
   const [lostAllBall, setLostAllBall] = useState<boolean>(false);
@@ -32,14 +33,14 @@ const App: React.FC = () => {
   }, []);
 
   const initCardList=()=>{
-    const initCard = createRandomCardNumList();
+    const initCard = createRandomCardNumList(cardSize);
     setCardList(initCard.cardNumList);
     setColCheckCardList(initCard.centerFreeNumList);
-    const crossNumList1 = [...Array(5)].map((val, idx) => {
-      return (val = initCard.cardNumList[idx][idx]);
+    const crossNumList1 = [...Array(cardSize)].map((val, idx) => {
+      return initCard.cardNumList[idx][idx];
     });
-    const crossNumList2 = [...Array(5)].map((val, idx) => {
-      return (val = initCard.cardNumList[idx][4 - idx]);
+    const crossNumList2 = [...Array(cardSize)].map((val, idx) => {
+      return initCard.cardNumList[idx][4 - idx];
     });
     setCrossCheckCardList([crossNumList1, crossNumList2]);
   }
@@ -64,11 +65,7 @@ const App: React.FC = () => {
       return checkarray.length;
     });
     //checkCountListに4があればReach、5があればBingo
-    if (checkCountList.includes(reachOrBingo)) {
-      return true;
-    } else {
-      return false;
-    }
+    return checkCountList.includes(reachOrBingo) ? true : false;
   },[ballNumList, cardList, colCheckCardList,crossCheckCardList]);
 
   const resetBingo = () => {
