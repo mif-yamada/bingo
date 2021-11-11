@@ -1,45 +1,33 @@
-//ボールランダムとカードのランダム
-
-//min max内からランダムで整数を一つ返す
 export const randomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//ボール用。
-export const noDuplicationRandomNum = (min: number, max: number, array: number[]):number => {
+export const noDuplicationRandomNum = (min: number, max: number, ballList: number[]):number => {
   const getNum: number = randomNumber(min, max);
-  if (array.includes(getNum)){
-    return noDuplicationRandomNum(min, max, array);
+  if (ballList.includes(getNum)){
+    return noDuplicationRandomNum(min, max, ballList);
   }
   return getNum;
 }
 
-export const createRandomNumberList = (min: number, max: number, length: number) => {
+export const createRandomNumList = (min: number, max: number, length: number) => {
   const randomNumList = [...Array(length)].map(() => randomNumber(min, max));
   return Array.from(randomNumList);
 }
 
-export const createNoDuplicationSortRandomNumList = (min: number, max: number, size:number) => {
-  const callCreateRandomNumList = (length: number) =>
-  createRandomNumberList(min, max, length);
-  //Sizeに足りない要素を加える
+export const createNoDuplicationRandomNumberList = (min: number, max: number, size:number) => {
   const joinRandomNumList = (array: number[], joinElementNum: number) => {
-    const joinList = callCreateRandomNumList(joinElementNum);
+    const joinList = createRandomNumList(min,max,joinElementNum);
     return Array.from(new Set([...array, ...joinList]));
   };
-
-  //ここでダブりを排除
-  const initNumList = Array.from(new Set(callCreateRandomNumList(size)));
+  const initNumList = Array.from(new Set(createRandomNumList(min,max,size)));
   const createNoDuplicationRandomNumList = (): number[] => {
-    const noDuplicationRandomNumList = joinRandomNumList(
-      initNumList,
-      size - initNumList.length
-    );
+    const noDuplicationRandomNumList = joinRandomNumList(initNumList,size - initNumList.length);
     if (size !== noDuplicationRandomNumList.length) {
       return createNoDuplicationRandomNumList();
     }
     return noDuplicationRandomNumList;
   };
-  const list = Array.from(createNoDuplicationRandomNumList());
+  const list = createNoDuplicationRandomNumList();
   return list;
 }

@@ -5,32 +5,35 @@ interface CellProps{
   num: number;
   isBlank?:boolean;
 }
+
 const StyledCell = styled.div`
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color:#fef6de;
 `;
-
-const StyleCellIsBlank = styled(StyledCell)`
-  background-color: #f8e993;
-`;
-
 const StyleCellFrame = styled(StyledCell)`
   border: solid 1px;
-  border-color: #f8e993;
+  border-radius: 40px 40px 2px 2px;
+  border-color: rgb(65, 75, 141);
+`;
+const StyleCellIsBlank = styled(StyleCellFrame)`
+  background-color: rgb(65, 75, 141);
 `;
 
-const Cell: React.FC<CellProps> = (props:CellProps) => {
+
+const Cell: React.FC<CellProps> = (props: CellProps) => {
   const {
     num,
     isBlank
   } = props;
-  return (
-    isBlank ?
-      <StyleCellIsBlank>{ num }</StyleCellIsBlank> :
-      <StyleCellFrame>{num}</StyleCellFrame>
+  const strNum = num === 0 ? "FREE" : num;
+  return isBlank ? (
+    <StyleCellIsBlank>{strNum}</StyleCellIsBlank>
+  ) : (
+    <StyleCellFrame>{strNum}</StyleCellFrame>
   );
 };
 
