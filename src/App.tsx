@@ -40,7 +40,7 @@ const App: React.FC = () => {
       return initCard.cardNumList[idx][idx];
     });
     const crossNumList2 = [...Array(cardSize)].map((val, idx) => {
-      return initCard.cardNumList[idx][4 - idx];
+      return initCard.cardNumList[idx][(cardSize-1) - idx];
     });
     setCrossCheckCardList([crossNumList1, crossNumList2]);
   }
