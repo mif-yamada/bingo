@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
-interface CellProps{
+interface CellProps {
   num: number;
-  isBlank?:boolean;
+  isBlank?: boolean;
 }
 
 const StyledCell = styled.div`
@@ -12,7 +12,7 @@ const StyledCell = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color:#fef6de;
+  color: #fef6de;
 `;
 const StyleCellFrame = styled(StyledCell)`
   border: solid 1px;
@@ -23,18 +23,12 @@ const StyleCellIsBlank = styled(StyleCellFrame)`
   background-color: rgb(65, 75, 141);
 `;
 
-
 const Cell: React.FC<CellProps> = (props: CellProps) => {
-  const {
-    num,
-    isBlank
-  } = props;
-  const strNum = num === 0 ? "FREE" : num;
-  return isBlank ? (
-    <StyleCellIsBlank>{strNum}</StyleCellIsBlank>
-  ) : (
-    <StyleCellFrame>{strNum}</StyleCellFrame>
-  );
+  const { num, isBlank } = props;
+  const strNum = num === 0 ? 'FREE' : num;
+  return isBlank
+    ? (<StyleCellIsBlank>{strNum}</StyleCellIsBlank>)
+    : (<StyleCellFrame>{strNum}</StyleCellFrame>);
 };
 
 export { Cell };

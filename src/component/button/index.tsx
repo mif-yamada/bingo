@@ -25,10 +25,7 @@ const StyledButton = styled.button`
 `;
 
 const Button:React.FC<ButtonProps> = (props:ButtonProps) => {
-  const {
-    title,
-    onClick
-  } = props;
+  const { title, onClick } = props;
   return (
     <StyledButton onClick={onClick}>
       {title}

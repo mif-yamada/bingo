@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
-import { Cell } from "../cell";
+import { Cell } from '../cell';
 
 interface CardProps {
   cardNumberList: number[][];
@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       <tbody>
         {cardNumberList.map((li, i) => {
           return (
-            <tr key={`${ li[i] } ${ i };`}>
+            <tr key={`${li[i]} ${i};`}>
               {li.map((val: number, idx: number) => {
                 return (
                   <td key={`${val} ${idx}`}>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import styled from "@emotion/styled";
+import React, { useState, useEffect, useCallback } from 'react';
+import styled from '@emotion/styled';
 
-import { Button } from "./component/button";
-import { Card } from "./component/card";
-import { createRandomCardNumList } from "./utils/createCard";
-import { noDuplicationRandomNum } from "./utils/random";
+import { Button } from './component/button';
+import { Card } from './component/card';
+import { createRandomCardNumList } from './utils/createCard';
+import { noDuplicationRandomNum } from './utils/random';
 
 const StyledPage = styled.div`
   text-align: center;
@@ -13,8 +13,8 @@ const StyledPage = styled.div`
   background-color: #bfc6de;
 `;
 const StyledResult = styled.div`
-  padding:10px;
-  color:#374362;
+  padding: 10px;
+  color: #374362;
 `;
 
 const App: React.FC = () => {
@@ -25,14 +25,14 @@ const App: React.FC = () => {
   const [cardList, setCardList] = useState<number[][]>([]);
   const [colCheckCardList, setColCheckCardList] = useState<number[][]>([]);
   const [crossCheckCardList, setCrossCheckCardList] = useState<number[][]>([]);
-  const [isReach,setIsReach]=useState<boolean>(false);
-  const [isBingo,setIsBingo]=useState<boolean>(false);
+  const [isReach, setIsReach] = useState<boolean>(false);
+  const [isBingo, setIsBingo] = useState<boolean>(false);
 
   useEffect(() => {
     initCardList();
   }, []);
 
-  const initCardList=()=>{
+  const initCardList = () => {
     const initCard = createRandomCardNumList(cardSize);
     setCardList(initCard.cardNumList);
     setColCheckCardList(initCard.centerFreeNumList);
@@ -40,10 +40,10 @@ const App: React.FC = () => {
       return initCard.cardNumList[idx][idx];
     });
     const crossNumList2 = [...Array(cardSize)].map((val, idx) => {
-      return initCard.cardNumList[idx][(cardSize-1) - idx];
+      return initCard.cardNumList[idx][cardSize - 1 - idx];
     });
     setCrossCheckCardList([crossNumList1, crossNumList2]);
-  }
+  };
 
   const getBall = () => {
     if (ballNumList.length < 76) {
@@ -55,18 +55,21 @@ const App: React.FC = () => {
     }
   };
 
-  const checkCard = useCallback((reachOrBingo: number): boolean => {
-    //縦横斜め合体リスト
-    const checkList = cardList.concat(colCheckCardList, crossCheckCardList);
-    const checkCountList = checkList.map((array) => {
-      const checkarray: number[] = array.filter((cardNum) =>
-        ballNumList.includes(cardNum)
-      );
-      return checkarray.length;
-    });
-    //checkCountListに4があればReach、5があればBingo
-    return checkCountList.includes(reachOrBingo) ? true : false;
-  },[ballNumList, cardList, colCheckCardList,crossCheckCardList]);
+  const checkCard = useCallback(
+    (reachOrBingo: number): boolean => {
+      // 縦横斜め合体リスト
+      const checkList = cardList.concat(colCheckCardList, crossCheckCardList);
+      const checkCountList = checkList.map((array) => {
+        const checkarray: number[] = array.filter((cardNum) =>
+          ballNumList.includes(cardNum)
+        );
+        return checkarray.length;
+      });
+      // checkCountListに4があればReach、5があればBingo
+      return checkCountList.includes(reachOrBingo);
+    },
+    [ballNumList, cardList, colCheckCardList, crossCheckCardList]
+  );
 
   const resetBingo = () => {
     setBall(0);
@@ -75,7 +78,7 @@ const App: React.FC = () => {
     initCardList();
     setIsReach(false);
     setIsBingo(false);
-  }
+  };
 
   useEffect(() => {
     setIsReach(checkCard(4));
@@ -85,9 +88,9 @@ const App: React.FC = () => {
   return (
     <StyledPage>
       <StyledResult>GetBallNum:{ball}</StyledResult>
-      <StyledResult>REACH:{isReach ? "リーチ！" : ""}</StyledResult>
-      <StyledResult>BINGO:{isBingo ? "ビンゴ‼︎" : ""}</StyledResult>
-      <StyledResult>{lostAllBall&& "END"}</StyledResult>
+      <StyledResult>REACH:{isReach ? 'リーチ！' : ''}</StyledResult>
+      <StyledResult>BINGO:{isBingo ? 'ビンゴ‼︎' : ''}</StyledResult>
+      <StyledResult>{lostAllBall && 'END'}</StyledResult>
       <Button title="GetBall" onClick={() => getBall()}></Button>
       <Button title="Reset" onClick={() => resetBingo()}></Button>
       <Card cardNumberList={cardList} ballNumList={ballNumList}></Card>
