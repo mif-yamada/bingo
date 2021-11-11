@@ -7,9 +7,9 @@ export const noDuplicationRandomNum = (
   max: number,
   ballList: number[]
 ): number => {
-  const getNum: number = randomNumber(min, max);
-  if (ballList.includes(getNum)) {
-    return noDuplicationRandomNum(min, max, ballList);
+  let getNum = randomNumber(min, max);
+  while (ballList.includes(getNum)) {
+    getNum = randomNumber(min, max);
   }
   return getNum;
 };
@@ -29,18 +29,10 @@ export const createNoDuplicationRandomNumberList = (
   max: number,
   size: number
 ) => {
-  const joinRandomNumList = (array: number[], joinElementNum: number) => {
-    const joinList = createRandomNumList(min, max, joinElementNum);
-    return Array.from(new Set([...array, ...joinList]));
-  };
-  const initNumList = Array.from(new Set(createRandomNumList(min, max, size)));
   const createNoDuplicationRandomNumList = (): number[] => {
-    const noDuplicationRandomNumList = joinRandomNumList(
-      initNumList,
-      size - initNumList.length
-    );
-    if (size !== noDuplicationRandomNumList.length) {
-      return createNoDuplicationRandomNumList();
+    const noDuplicationRandomNumList:number[] = [];
+    while (noDuplicationRandomNumList.length < size) {
+      noDuplicationRandomNumList.push(randomNumber(min, max));
     }
     return noDuplicationRandomNumList;
   };
