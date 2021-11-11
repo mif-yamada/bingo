@@ -19,7 +19,8 @@ export const createRandomNumList = (
   max: number,
   length: number
 ) => {
-  const randomNumList = [...Array(length)].map(() => randomNumber(min, max));
+  const randomNumList = [...Array(length)]
+    .map(() => randomNumber(min, max));
   return Array.from(randomNumList);
 };
 
