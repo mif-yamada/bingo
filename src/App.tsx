@@ -63,7 +63,6 @@ const App: React.FC = () => {
       );
       return checkarray.length;
     });
-
     //checkCountListに4があればReach、5があればBingo
     if (checkCountList.includes(reachOrBingo)) {
       return true;
