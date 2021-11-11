@@ -8,6 +8,7 @@ export const noDuplicationRandomNum = (min: number, max: number, ballList: numbe
   if (ballList.includes(getNum)){
     return noDuplicationRandomNum(min, max, ballList);
   }
+  //TODO:
   // const initNumArray = [...Array(size)].map((val, idx) => idx + 1);
   // const getNum: number = randomNumber(min, max);
 
